@@ -21,7 +21,7 @@ Tutte le specifiche del progetto saranno validate in fase di correzione con part
 
 ### Progettazione
 ##### Letteratura
-Si vuole realizzare un software che permetta di classificare i post Facebook di un utente verificando la presenza di parole chiave nel titolo del post, nei commenti e nel luogo, di effettuare statistiche sulla frequenza di pubblicazione dei post applicando filtri per fasce orarie, giorni, e parole chiave.
+Si vuole realizzare un software che permetta di classificare i post Facebook di un utente verificando la presenza di parole chiave nel titolo del post e nei commenti e di effettuare statistiche sulla frequenza di pubblicazione dei post applicando filtri per fasce orarie, giorni, e parole chiave.
 ##### Realizzazione
 Si ipotizza di realizzare un applicativo java che implementi le funzionalità del framework Spring Boot (https://spring.io/) per lo sviluppo di un servizio di API, ovvero un insieme di definizioni e protocolli con i quali vengono realizzati e integrati software applicativi. 
 Si è optato di definire delle API di tipo **REST** la quali devono detenere le seguenti caratteristiche:
