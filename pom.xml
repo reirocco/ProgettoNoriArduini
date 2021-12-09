@@ -12,7 +12,7 @@
     <artifactId>ProgettoNoriArduini</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ProgettoNoriArduini</name>
-    <description>ProgettoNoriArduini</description>
+    <description>Progetto d'esame di programmazione ad oggetti valido per l'appello di gennaio 2021</description>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -33,6 +33,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
