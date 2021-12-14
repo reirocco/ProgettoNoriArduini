@@ -15,9 +15,11 @@ import java.util.ArrayList;
 public class Configuration {
     private String accessToken;
     private ArrayList<String> dataSet;
+    private String configFilesFolder;
 
     public Configuration() {
         this.dataSet = new ArrayList<>();
+        this.configFilesFolder = "config/";
     }
 
     public String getAccessToken() {
@@ -28,7 +30,7 @@ public class Configuration {
         JSONParser parser = new JSONParser();
 
         try {
-            JSONObject jsonObject = (JSONObject) parser.parse(new FileReader("config/config.json"));
+            JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(this.configFilesFolder + "config.json"));
             this.accessToken = (String) jsonObject.get("access_token");
         } catch (FileNotFoundException e) {
             Logger.printErrorMessage("Impossibile caricare le configurazioni del server: file non trovato");
@@ -43,7 +45,7 @@ public class Configuration {
         JSONParser parser = new JSONParser();
 
         try {
-            JSONObject jsonObject = (JSONObject) parser.parse(new FileReader("config/dataset.json"));
+            JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(this.configFilesFolder + "dataset.json"));
             JSONArray wordList = (JSONArray) jsonObject.get("keywords");
             this.dataSet = wordList;
         } catch (FileNotFoundException e) {
