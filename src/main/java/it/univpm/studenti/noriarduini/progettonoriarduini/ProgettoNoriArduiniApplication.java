@@ -5,12 +5,14 @@ import it.univpm.studenti.noriarduini.progettonoriarduini.view.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.io.FileNotFoundException;
+
 @SpringBootApplication
 public class ProgettoNoriArduiniApplication {
     // questo oggetto contiene tutte le configurazioni necessarie per il corretto funzionamento dell'app
     public static Configuration conf = new Configuration();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         // saluto l'utente
         Logger.printInfoMessage("Facebook API server - di Federico Arduini e Rocco Nori");
         Logger.printInfoMessage("Realizzato per il progetto di OOP dell'Università Politecnica delle Marche");

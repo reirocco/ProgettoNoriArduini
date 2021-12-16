@@ -13,8 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class APIController {
+
     @RequestMapping("/ciao")
     public String greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
         return "Ciao! :)";
     }
+
+    @RequestMapping("/")
+    public String home(){
+        return "Hello World!";
+    }
+
 }
