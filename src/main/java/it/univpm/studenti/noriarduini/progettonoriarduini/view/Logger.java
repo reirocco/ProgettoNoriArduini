@@ -9,7 +9,6 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
-
 public class Logger {
 
     public static void printInfoMessage(String msg) {
