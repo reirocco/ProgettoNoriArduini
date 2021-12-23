@@ -2,14 +2,13 @@ package it.univpm.studenti.noriarduini.progettonoriarduini.model;
 
 import it.univpm.studenti.noriarduini.progettonoriarduini.view.Logger;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import java.io.*;
 import java.util.ArrayList;
 
 public class Configuration {
@@ -27,33 +26,27 @@ public class Configuration {
     }
 
     public void loadConfigurations() {
-        JSONParser parser = new JSONParser();
-
         try {
-            JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(this.configFilesFolder + "config.json"));
+            String jsonContent = new String(Files.readAllBytes(Paths.get(this.configFilesFolder + "config.json")));
+            JSONObject jsonObject = new JSONObject(jsonContent);
             this.accessToken = (String) jsonObject.get("access_token");
-        } catch (FileNotFoundException e) {
-            Logger.printErrorMessage("Impossibile caricare le configurazioni del server: file non trovato");
         } catch (IOException e) {
-            Logger.printErrorMessage("Impossibile caricare le configurazioni del server: errore di I/O");
-        } catch (ParseException e) {
-            Logger.printErrorMessage("Il file di configurazione non è valido; probabilmente è mal-formattato.");
+            Logger.printErrorMessage("Impossibile caricare le configurazioni del server: errore di I/O (probabilmente il file non esiste)");
         }
     }
 
     public void loadDataset() {
-        JSONParser parser = new JSONParser();
-
         try {
-            JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(this.configFilesFolder + "dataset.json"));
-            JSONArray wordList = (JSONArray) jsonObject.get("keywords");
-            this.dataSet = wordList;
-        } catch (FileNotFoundException e) {
-            Logger.printErrorMessage("Impossibile caricare il dataset delle parole chiave: file non trovato");
+            String jsonContent = new String(Files.readAllBytes(Paths.get(this.configFilesFolder + "dataset.json")));
+
+            JSONObject jsonObject = new JSONObject(jsonContent);
+            JSONArray wordList = jsonObject.getJSONArray("keywords");
+
+            for (Object x : wordList) {
+                this.dataSet.add((String) x);
+            }
         } catch (IOException e) {
-            Logger.printErrorMessage("Impossibile caricare il dataset delle parole chiave: errore di I/O");
-        } catch (ParseException e) {
-            Logger.printErrorMessage("Il file del dataset delle parole chiave non è valido; probabilmente è mal-formattato.");
+            e.printStackTrace();
         }
     }
 }

@@ -19,8 +19,8 @@ public class Post {
         this.id = id;
 
         // conversione della data di pubblicazione da String a LocalDateTime
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-        this.dataOraPubblicazione = LocalDateTime.parse(dataOraPubblicazione);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZ");
+        this.dataOraPubblicazione = LocalDateTime.parse(dataOraPubblicazione, formatter);
     }
 
     public String getMessage() {

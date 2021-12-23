@@ -1,9 +1,7 @@
 package it.univpm.studenti.noriarduini.progettonoriarduini.service;
 
-import it.univpm.studenti.noriarduini.progettonoriarduini.model.Post;
+import org.json.JSONObject;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,17 +13,13 @@ public class Request {
         this.restTemplate = restTemplateBuilder.build();
     }
 
-    public Post plainJsonGetRequest(String url) {
-        // faccio la richiesta all'url che viene passato come parametro
-        ResponseEntity<Post> response = this.restTemplate.getForEntity(url, Post.class, 1);
+    // metodo che permette di effettuare una richesta GET all'url desiderato e ne ritorna il risultato come stringa
+    public String plainTextGetRequest(String url) {
+        return this.restTemplate.getForObject(url, String.class, 1);
+    }
 
-        // controllo il codice di risposta HTTP...
-        if(response.getStatusCode() == HttpStatus.OK) {
-            // ... se è OK (200) allora va bene, ritorno il corpo della risposta
-            return response.getBody();
-        } else {
-            // ... altrimenti c'è qualcosa che non va, non torno nulla
-            return null;
-        }
+    // metodo che permette di effettuare una richesta GET all'url desiderato e ne ritorna il risultato come un oggetto JSON
+    public JSONObject jsonGetRequest(String url) {
+        return this.restTemplate.getForObject(url, JSONObject.class, 1);
     }
 }
