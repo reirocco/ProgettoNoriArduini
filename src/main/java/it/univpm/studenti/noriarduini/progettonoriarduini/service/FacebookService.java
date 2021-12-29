@@ -3,39 +3,29 @@ package it.univpm.studenti.noriarduini.progettonoriarduini.service;
 import it.univpm.studenti.noriarduini.progettonoriarduini.ProgettoNoriArduiniApplication;
 import it.univpm.studenti.noriarduini.progettonoriarduini.model.Feed;
 import it.univpm.studenti.noriarduini.progettonoriarduini.model.Post;
-import org.apache.tomcat.jni.Local;
-import org.json.*;
+import it.univpm.studenti.noriarduini.progettonoriarduini.view.Logger;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
+@Service
 public class FacebookService {
     public static JSONObject getUserStats() {
         // ottenimento del JSON dell'intero feed
         Request request = new Request(new RestTemplateBuilder());
-        JSONObject feedRaw = new JSONObject(request.plainTextGetRequest("https://graph.facebook.com/me/feed?access_token=" + ProgettoNoriArduiniApplication.conf.getAccessToken()));
+        JSONArray feedRaw = new JSONArray(request.jsonArrayGetRequest("https://graph.facebook.com/me/feed?limit=100&access_token=" + ProgettoNoriArduiniApplication.conf.getAccessToken()));
 
-        // popolo il feed con tutti i suoi post
-        Feed feed = new Feed();
-        JSONArray postArray = feedRaw.getJSONArray("data");
-
-        for (Object x : postArray) {
-            JSONObject postRaw = (JSONObject) x;
-
-            String postMsg;
-            try {
-                postMsg = postRaw.getString("message");
-            } catch (JSONException e) {
-                postMsg = "- empty -";
-            }
-
-            Post post = new Post(postMsg, postRaw.getString("id"), postRaw.getString("created_time"));
-            feed.addPost(post);
-        }
+        Feed feed = JSONArrayToFeed(feedRaw);
 
         // conto quanti post sono stati fatti nei vari archi temporali e metto questi risultati dentro un json
         JSONObject result = new JSONObject();
@@ -58,4 +48,63 @@ public class FacebookService {
         // ritorno il tutto
         return result;
     }
+
+    public static JSONArray getFilteredresults(String json) {
+        JSONObject j = new JSONObject(json);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        Locale loc = new Locale("en", "it");
+        String payload = "";
+
+        /* compongo il payload della mia richiesta in GET in base alle key del json
+         * si possono verificare 3 casi:
+         *  -> viene passata solo la chiave "since" : la richiesta restituisce tutti i post pubblicati da un utente a partire da una data specifica fino alla fine;
+         *  -> viene passata solo la chiave "until" : la richiesta restituisce tutti i post pubblicati da un utente fino a una data specifica partendo dal primo;
+         *  -> vengono passate entrambe le chiavi : la richiesta restituisce i post pubblicati fra le due date
+         */
+        if (j.has("since")) {
+            try {
+                LocalDate dateTime = LocalDate.parse(j.getString("since"), formatter);
+                payload += "&since=" + dateTime.getDayOfMonth() + "+" + dateTime.getMonth().getDisplayName(TextStyle.FULL, loc) + "+" + dateTime.getYear();
+            } catch (DateTimeParseException e) {
+                Logger.printErrorMessage(e.getMessage());
+                throw e;
+            }
+        }
+        if (j.has("until"))
+            try {
+                LocalDate dateTime = LocalDate.parse(j.getString("until"), formatter);
+                payload += "&until=" + dateTime.getDayOfMonth() + "+" + dateTime.getMonth().getDisplayName(TextStyle.FULL, loc) + "+" + dateTime.getYear();
+            } catch (DateTimeParseException e) {
+                Logger.printErrorMessage(e.getMessage());
+            }
+
+        // assemblo richiesta http e la invio alle API di facebook graph
+        Request request = new Request(new RestTemplateBuilder());
+        JSONArray feedRaw = new JSONArray(request.jsonArrayGetRequest("https://graph.facebook.com/me/feed?limit=100&access_token=" + ProgettoNoriArduiniApplication.conf.getAccessToken() + payload));
+
+
+        return feedRaw;
+    }
+
+    private static Feed JSONArrayToFeed(JSONArray postArray) {
+        // popolo il feed con tutti i suoi post
+        Feed feed = new Feed();
+
+        for (Object x : postArray) {
+            JSONObject postRaw = (JSONObject) x;
+
+            String postMsg;
+            try {
+                postMsg = postRaw.getString("message");
+            } catch (JSONException e) {
+                postMsg = "- empty -";
+            }
+
+            Post post = new Post(postMsg, postRaw.getString("id"), postRaw.getString("created_time"));
+            feed.addPost(post);
+        }
+        return feed;
+    }
+
+
 }

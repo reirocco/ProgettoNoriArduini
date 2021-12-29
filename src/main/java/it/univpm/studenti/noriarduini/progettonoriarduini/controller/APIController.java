@@ -1,19 +1,17 @@
 package it.univpm.studenti.noriarduini.progettonoriarduini.controller;
 
 import it.univpm.studenti.noriarduini.progettonoriarduini.service.FacebookService;
-import org.json.JSONObject;
+import it.univpm.studenti.noriarduini.progettonoriarduini.view.Logger;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.Map;
+
 
 @RestController
 public class APIController {
-    @RequestMapping("/hello")
-    public String greeting() {
-        return "Hello!";
-    }
 
     @RequestMapping("/")
     public String home(){
@@ -24,4 +22,23 @@ public class APIController {
     public Map<String, Object> stats() {
         return FacebookService.getUserStats().toMap();
     }
+
+    @PostMapping("/filters")
+    public String postBody(@RequestBody String json) {
+        Object res;
+        try{
+            res = FacebookService.getFilteredresults(json).toString();
+        }catch (Exception e){
+            Logger.printErrorMessage(e.getLocalizedMessage());
+            res = e.getMessage();
+        }
+        return (String) res;
+    }
+
+
+
+
+
+
+
 }

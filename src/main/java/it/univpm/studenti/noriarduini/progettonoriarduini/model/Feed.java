@@ -1,7 +1,5 @@
 package it.univpm.studenti.noriarduini.progettonoriarduini.model;
 
-import org.apache.tomcat.jni.Local;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 

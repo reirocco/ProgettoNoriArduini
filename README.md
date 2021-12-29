@@ -28,6 +28,13 @@ Si è optato di definire delle API di tipo **REST** la quali devono detenere le 
 * Un'architettura client-server composta da client, server e risorse, con richieste gestite tramite Hypertext Transfer Protocol (alternativa HTTP over Secure Socket Layer).
 * Una comunicazione tra client e server di tipo **StateLess** (ovvero che non tiene traccia delle richieste effettuate dal client)
 * Una interfaccia comune per i componenti, che permetta che le informazioni siano trasferite in forma standard in modo che il client possa leggerle e rielaborarle.
-Verranno integrate al nostro servizio le API di Facebook fornite da Meta per poter gestire le ricerche all'interno del social network
+
+Verranno integrate al nostro servizio le API di Facebook fornite da Meta per poter gestire le ricerche all'interno del social network.
+
+Il programma dovrà leggere automaticamente le configurazioni base del server spring, come il socket (ip + porta) su cui è stato aperto.
+
+##### Note di sviluppo
+* Si è constatato che le API Graph di facebook hanno un limite di chiamate massimo in un dato periodo di tempo. Passato tal periodo tornano a funzionare correttamente.
+
 
 
