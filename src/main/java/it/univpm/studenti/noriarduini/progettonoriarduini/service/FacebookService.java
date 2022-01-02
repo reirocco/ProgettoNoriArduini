@@ -1,6 +1,8 @@
 package it.univpm.studenti.noriarduini.progettonoriarduini.service;
 
 import it.univpm.studenti.noriarduini.progettonoriarduini.ProgettoNoriArduiniApplication;
+import it.univpm.studenti.noriarduini.progettonoriarduini.filters.DateFilter;
+import it.univpm.studenti.noriarduini.progettonoriarduini.filters.TimeFilter;
 import it.univpm.studenti.noriarduini.progettonoriarduini.model.Feed;
 import it.univpm.studenti.noriarduini.progettonoriarduini.model.Post;
 import it.univpm.studenti.noriarduini.progettonoriarduini.view.Logger;
@@ -25,7 +27,7 @@ public class FacebookService {
         Request request = new Request(new RestTemplateBuilder());
         JSONArray feedRaw = new JSONArray(request.jsonArrayGetRequest("https://graph.facebook.com/me/feed?limit=100&access_token=" + ProgettoNoriArduiniApplication.conf.getAccessToken()));
 
-        Feed feed = JSONArrayToFeed(feedRaw);
+        Feed feed = Feed.buildFromJsonArray(feedRaw);
 
         // conto quanti post sono stati fatti nei vari archi temporali e metto questi risultati dentro un json
         JSONObject result = new JSONObject();
@@ -54,9 +56,21 @@ public class FacebookService {
         Request request = new Request(new RestTemplateBuilder());
         JSONObject requestBody = new JSONObject(json);
         JSONArray feedArray = new JSONArray(request.jsonArrayGetRequest("https://graph.facebook.com/me/feed?limit=100&access_token=" + ProgettoNoriArduiniApplication.conf.getAccessToken()));
-        Feed feed = JSONArrayToFeed(feedArray);
+        Feed feed = Feed.buildFromJsonArray(feedArray);
 
-        // controllo se i filtri sono validi
+        DateFilter dateFilter = new DateFilter();
+        TimeFilter timeFilter = new TimeFilter();
+
+        // controllo se i filtri sono validi - se lo sono filtro i post
+        if (dateFilter.check(requestBody))
+            feed = dateFilter.filter(requestBody, feed);
+        if (timeFilter.check(requestBody))
+            feed = timeFilter.filter(requestBody, feed);
+
+
+
+
+
         /*DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         Locale loc = new Locale("en", "it");
         String payload = "";*/
@@ -93,26 +107,4 @@ public class FacebookService {
         return result;*/
         return null;
     }
-
-    private static Feed JSONArrayToFeed(JSONArray postArray) {
-        // popolo il feed con tutti i suoi post
-        Feed feed = new Feed();
-
-        for (Object x : postArray) {
-            JSONObject postRaw = (JSONObject) x;
-
-            String postMsg;
-            try {
-                postMsg = postRaw.getString("message");
-            } catch (JSONException e) {
-                postMsg = "- empty -";
-            }
-
-            Post post = new Post(postMsg, postRaw.getString("id"), postRaw.getString("created_time"));
-            feed.addPost(post);
-        }
-        return feed;
-    }
-
-
 }
