@@ -49,11 +49,17 @@ public class FacebookService {
         return result;
     }
 
-    public static JSONArray getFilteredresults(String json) {
-        JSONObject j = new JSONObject(json);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static JSONObject getFilteredResults(String json) {
+        // ottengo tutto il feed dell'utente
+        Request request = new Request(new RestTemplateBuilder());
+        JSONObject requestBody = new JSONObject(json);
+        JSONArray feedArray = new JSONArray(request.jsonArrayGetRequest("https://graph.facebook.com/me/feed?limit=100&access_token=" + ProgettoNoriArduiniApplication.conf.getAccessToken()));
+        Feed feed = JSONArrayToFeed(feedArray);
+
+        // controllo se i filtri sono validi
+        /*DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         Locale loc = new Locale("en", "it");
-        String payload = "";
+        String payload = "";*/
 
         /* compongo il payload della mia richiesta in GET in base alle key del json
          * si possono verificare 3 casi:
@@ -61,7 +67,7 @@ public class FacebookService {
          *  -> viene passata solo la chiave "until" : la richiesta restituisce tutti i post pubblicati da un utente fino a una data specifica partendo dal primo;
          *  -> vengono passate entrambe le chiavi : la richiesta restituisce i post pubblicati fra le due date
          */
-        if (j.has("since")) {
+        /*if (j.has("since")) {
             try {
                 LocalDate dateTime = LocalDate.parse(j.getString("since"), formatter);
                 payload += "&since=" + dateTime.getDayOfMonth() + "+" + dateTime.getMonth().getDisplayName(TextStyle.FULL, loc) + "+" + dateTime.getYear();
@@ -82,8 +88,10 @@ public class FacebookService {
         Request request = new Request(new RestTemplateBuilder());
         JSONArray feedRaw = new JSONArray(request.jsonArrayGetRequest("https://graph.facebook.com/me/feed?limit=100&access_token=" + ProgettoNoriArduiniApplication.conf.getAccessToken() + payload));
 
-
-        return feedRaw;
+        JSONObject result = new JSONObject();
+        result.put("post", feedRaw);
+        return result;*/
+        return null;
     }
 
     private static Feed JSONArrayToFeed(JSONArray postArray) {

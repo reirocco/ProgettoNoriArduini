@@ -24,21 +24,15 @@ public class APIController {
     }
 
     @PostMapping("/filters")
-    public String postBody(@RequestBody String json) {
-        Object res;
+    public Map<String, Object> postBody(@RequestBody String json) {
+        /*Object res;
         try{
             res = FacebookService.getFilteredresults(json).toString();
         }catch (Exception e){
             Logger.printErrorMessage(e.getLocalizedMessage());
             res = e.getMessage();
-        }
-        return (String) res;
+        }*/
+
+        return FacebookService.getFilteredResults(json).toMap();
     }
-
-
-
-
-
-
-
 }
