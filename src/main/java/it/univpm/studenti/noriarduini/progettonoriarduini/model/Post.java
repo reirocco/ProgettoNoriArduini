@@ -52,7 +52,7 @@ public class Post {
     }
 
     public boolean hasKeyWords(ArrayList<String> dataset) {
-        Boolean found = false;
+        boolean found = false;
 
         for (String x : dataset) {
             // versione case insensitive
