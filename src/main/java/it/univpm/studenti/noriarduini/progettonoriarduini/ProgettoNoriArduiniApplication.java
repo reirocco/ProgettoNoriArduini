@@ -1,6 +1,6 @@
 package it.univpm.studenti.noriarduini.progettonoriarduini;
 
-import it.univpm.studenti.noriarduini.progettonoriarduini.model.Configuration;
+import it.univpm.studenti.noriarduini.progettonoriarduini.utility.Configuration;
 import it.univpm.studenti.noriarduini.progettonoriarduini.view.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -2,12 +2,10 @@ package it.univpm.studenti.noriarduini.progettonoriarduini.service;
 
 import it.univpm.studenti.noriarduini.progettonoriarduini.ProgettoNoriArduiniApplication;
 import it.univpm.studenti.noriarduini.progettonoriarduini.filters.DateFilter;
+import it.univpm.studenti.noriarduini.progettonoriarduini.filters.KeyWordsFilter;
 import it.univpm.studenti.noriarduini.progettonoriarduini.filters.TimeFilter;
 import it.univpm.studenti.noriarduini.progettonoriarduini.model.Feed;
-import it.univpm.studenti.noriarduini.progettonoriarduini.model.Post;
-import it.univpm.studenti.noriarduini.progettonoriarduini.view.Logger;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
@@ -15,17 +13,13 @@ import org.springframework.stereotype.Service;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.format.TextStyle;
-import java.util.Locale;
 
 @Service
 public class FacebookService {
     public static JSONObject getUserStats() {
         // ottenimento del JSON dell'intero feed
         Request request = new Request(new RestTemplateBuilder());
-        JSONArray feedRaw = new JSONArray(request.jsonArrayGetRequest("https://graph.facebook.com/me/feed?limit=100&access_token=" + ProgettoNoriArduiniApplication.conf.getAccessToken()));
+        JSONArray feedRaw = new JSONArray(request.jsonArrayGetRequest("https://graph.facebook.com/me/feed?access_token=" + ProgettoNoriArduiniApplication.conf.getAccessToken() + "&limit=200"));
 
         Feed feed = Feed.buildFromJsonArray(feedRaw);
 
@@ -60,12 +54,15 @@ public class FacebookService {
 
         DateFilter dateFilter = new DateFilter();
         TimeFilter timeFilter = new TimeFilter();
+        KeyWordsFilter keyWordsFilter = new KeyWordsFilter();
 
         // controllo se i filtri sono validi - se lo sono filtro i post
         if (dateFilter.check(requestBody))
             feed = dateFilter.filter(requestBody, feed);
         if (timeFilter.check(requestBody))
             feed = timeFilter.filter(requestBody, feed);
+        if (keyWordsFilter.check(requestBody))
+            feed = keyWordsFilter.filter(requestBody, feed);
 
 
 
@@ -105,6 +102,8 @@ public class FacebookService {
         JSONObject result = new JSONObject();
         result.put("post", feedRaw);
         return result;*/
-        return null;
+        JSONObject result = new JSONObject();
+        result.put("data", Feed.buildFromFeed(feed));
+        return result;
     }
 }

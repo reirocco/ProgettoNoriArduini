@@ -1,16 +1,15 @@
-package it.univpm.studenti.noriarduini.progettonoriarduini.model;
+package it.univpm.studenti.noriarduini.progettonoriarduini.utility;
 
 import it.univpm.studenti.noriarduini.progettonoriarduini.view.Logger;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
-import java.io.*;
 import java.util.ArrayList;
 
+@org.springframework.context.annotation.Configuration
 public class Configuration {
     private String accessToken;
     private ArrayList<String> dataSet;
@@ -48,5 +47,9 @@ public class Configuration {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<String> getDataSet() {
+        return this.dataSet;
     }
 }

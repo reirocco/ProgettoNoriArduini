@@ -56,4 +56,14 @@ public class Feed {
         }
         return feed;
     }
+
+    public static JSONArray buildFromFeed (Feed feed){
+        JSONArray j = new JSONArray();
+        for (int i = 0; i < feed.getTotalPost(); i++){
+            j.put(feed.getSinglePost(i).exportJSONObject());
+        }
+        return j;
+    }
+
+
 }
