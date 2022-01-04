@@ -64,46 +64,9 @@ public class FacebookService {
         if (keyWordsFilter.check(requestBody))
             feed = keyWordsFilter.filter(requestBody, feed);
 
-
-
-
-
-        /*DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        Locale loc = new Locale("en", "it");
-        String payload = "";*/
-
-        /* compongo il payload della mia richiesta in GET in base alle key del json
-         * si possono verificare 3 casi:
-         *  -> viene passata solo la chiave "since" : la richiesta restituisce tutti i post pubblicati da un utente a partire da una data specifica fino alla fine;
-         *  -> viene passata solo la chiave "until" : la richiesta restituisce tutti i post pubblicati da un utente fino a una data specifica partendo dal primo;
-         *  -> vengono passate entrambe le chiavi : la richiesta restituisce i post pubblicati fra le due date
-         */
-        /*if (j.has("since")) {
-            try {
-                LocalDate dateTime = LocalDate.parse(j.getString("since"), formatter);
-                payload += "&since=" + dateTime.getDayOfMonth() + "+" + dateTime.getMonth().getDisplayName(TextStyle.FULL, loc) + "+" + dateTime.getYear();
-            } catch (DateTimeParseException e) {
-                Logger.printErrorMessage(e.getMessage());
-                throw e;
-            }
-        }
-        if (j.has("until"))
-            try {
-                LocalDate dateTime = LocalDate.parse(j.getString("until"), formatter);
-                payload += "&until=" + dateTime.getDayOfMonth() + "+" + dateTime.getMonth().getDisplayName(TextStyle.FULL, loc) + "+" + dateTime.getYear();
-            } catch (DateTimeParseException e) {
-                Logger.printErrorMessage(e.getMessage());
-            }
-
-        // assemblo richiesta http e la invio alle API di facebook graph
-        Request request = new Request(new RestTemplateBuilder());
-        JSONArray feedRaw = new JSONArray(request.jsonArrayGetRequest("https://graph.facebook.com/me/feed?limit=100&access_token=" + ProgettoNoriArduiniApplication.conf.getAccessToken() + payload));
-
+        // ritorno il feed filtrato
         JSONObject result = new JSONObject();
-        result.put("post", feedRaw);
-        return result;*/
-        JSONObject result = new JSONObject();
-        result.put("data", Feed.buildFromFeed(feed));
+        result.put("data", Feed.fromFeedToJsonArray(feed));
         return result;
     }
 }

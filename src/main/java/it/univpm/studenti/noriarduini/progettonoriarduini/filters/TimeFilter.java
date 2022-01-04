@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import java.time.LocalTime;
 import java.time.chrono.ChronoLocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.regex.PatternSyntaxException;
 
@@ -20,7 +21,7 @@ public class TimeFilter implements Filter{
         // controllo se è stato fornito un doppio orario; se si controllo che i due orari inclusi siano
         // validi
         String[] doubleTimeTest = this.twoItemsRange(requestBody.getString("range"));
-        if (doubleTimeTest != null) {
+        if (doubleTimeTest != null && doubleTimeTest.length > 1) {
             // doppio orario fornito, controllo entrambi gli orari
             try {
                 LocalTime time1 = LocalTime.parse(doubleTimeTest[0]);
@@ -47,9 +48,10 @@ public class TimeFilter implements Filter{
     public Feed filter(JSONObject requestBody, Feed feed) {
         // ottengo gli orari
         String[] doubleTimeTest = twoItemsRange(requestBody.getString("range"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         LocalTime timeStart, timeEnd;
 
-        if (doubleTimeTest != null) {
+        if (doubleTimeTest != null && doubleTimeTest.length > 1) {
             timeStart = LocalTime.parse(doubleTimeTest[0]);
             timeEnd = LocalTime.parse(doubleTimeTest[1]);
         } else {
@@ -61,12 +63,16 @@ public class TimeFilter implements Filter{
         Feed filteredFeed = new Feed();
         for (int i = 0; i < feed.getTotalPost(); i++) {
             Post p = feed.getSinglePost(i);
+            // faccio il parsing dell'orario di pubblicazione del post a partire dalla sua data e ora completa
+            LocalTime postTime = LocalTime.parse(p.getDataOraPubblicazione().format(formatter));
 
-            if (p.getDataOraPubblicazione().isAfter(ChronoLocalDateTime.from(timeStart))) {
-                if (timeEnd != null && p.getDataOraPubblicazione().isBefore(ChronoLocalDateTime.from(timeEnd)))
+            if (postTime.isAfter(timeStart)) {
+                if (timeEnd != null) {
+                    if (postTime.isBefore(timeEnd))
+                        filteredFeed.addPost(p);
+                } else {
                     filteredFeed.addPost(p);
-                else
-                    filteredFeed.addPost(p);
+                }
             }
         }
 

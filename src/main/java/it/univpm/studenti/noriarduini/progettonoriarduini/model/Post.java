@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Post {
     private String message;
@@ -51,7 +52,17 @@ public class Post {
     }
 
     public boolean hasKeyWords(ArrayList<String> dataset) {
-        return dataset.stream().parallel().anyMatch(this.message::contains);
+        Boolean found = false;
+
+        for (String x : dataset) {
+            // versione case insensitive
+            //if (!found && this.getMessage().toLowerCase().contains(x.toLowerCase())) found = true;
+
+            // versione case sensitive
+            if (!found && this.getMessage().contains(x)) found = true;
+        }
+
+        return found;
     }
 
 /*
@@ -74,12 +85,13 @@ public class Post {
 
  */
 
-
-    public JSONObject exportJSONObject() {
+    public JSONObject exportToJSONObject() {
         JSONObject j = new JSONObject();
-        j.append("id", this.getId());
-        j.append("message", this.getMessage());
-        j.append("date", this.getDataOraPubblicazione());
+
+        j.put("id", this.getId());
+        j.put("message", this.getMessage());
+        j.put("date", this.getDataOraPubblicazione());
+
         return j;
     }
 }

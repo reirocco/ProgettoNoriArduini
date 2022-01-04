@@ -12,41 +12,41 @@ public class KeyWordsFilter implements Filter {
 
     @Override
     public boolean check(JSONObject requestBody) {
-        boolean res = false;
-        if (requestBody.has("keywords")) {
-            res = true;
-        }
-        return res;
+        return requestBody.has("keywords");
     }
 
     @Override
     public Feed filter(JSONObject requestBody, Feed feed) {
         ArrayList<String> s;
+
         if (requestBody.has("keywords")) {
             JSONArray array = requestBody.getJSONArray("keywords");
-            // converto il JSONArray in ArrayList
+
+            // ottengo le keywords che serviranno per filtrare i post
             if (!array.isEmpty()) {
                 s = new ArrayList<String>();
                 for (int i = 0; i < array.length(); i++) {
                     s.add(array.getString(i));
                 }
             } else {
+                // se l'utente non ha messo nessun valore dentro l'array delle keywords le vado a prendere dal dataset
+                // che è stato caricato dal programma all'avvio
                 s = ProgettoNoriArduiniApplication.conf.getDataSet();
             }
-            Feed res = new Feed();
-            for (int i = 0; i < feed.getTotalPost(); i++) {
 
+            // vado a filtrare i post
+            Feed res = new Feed();
+
+            for (int i = 0; i < feed.getTotalPost(); i++) {
                 Post p = feed.getSinglePost(i);
 
                 if (p.hasKeyWords(s)) {
                     res.addPost(p);
                 }
-
-
             }
             return res;
         }
-        return new Feed();
+        return feed;
     }
 
 }

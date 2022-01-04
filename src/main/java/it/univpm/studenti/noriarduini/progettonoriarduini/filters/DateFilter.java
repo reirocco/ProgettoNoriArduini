@@ -26,8 +26,6 @@ public class DateFilter implements Filter{
                 // sollevare eccezione personalizzata - filtro composto male
                 return false;
             }
-        } else {
-            return false;
         }
 
         // controllo se la data su until è presente e corretta. se non dovesse essere presente o corretta il filtro
@@ -41,7 +39,7 @@ public class DateFilter implements Filter{
             }
         }
 
-        return true;
+        return requestBody.has("since") || requestBody.has("until");
     }
 
     public Feed filter(JSONObject requestBody, Feed fake) {
