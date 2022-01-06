@@ -1,5 +1,6 @@
 package it.univpm.studenti.noriarduini.progettonoriarduini.filters;
 
+import it.univpm.studenti.noriarduini.progettonoriarduini.exceptions.WrongFilterException;
 import it.univpm.studenti.noriarduini.progettonoriarduini.model.Feed;
 import it.univpm.studenti.noriarduini.progettonoriarduini.model.Post;
 import org.json.JSONObject;
@@ -12,7 +13,7 @@ import java.util.regex.PatternSyntaxException;
 
 public class TimeFilter implements Filter{
     @Override
-    public boolean check(JSONObject requestBody) {
+    public boolean check(JSONObject requestBody) throws WrongFilterException {
         // controllo se è presente innanzitutto la chiave "range"
         if (!requestBody.has("range")) {
             return false;
@@ -27,16 +28,14 @@ public class TimeFilter implements Filter{
                 LocalTime time1 = LocalTime.parse(doubleTimeTest[0]);
                 LocalTime time2 = LocalTime.parse(doubleTimeTest[1]);
             } catch (DateTimeParseException e) {
-                // orari non validi
-                return false;
+                throw new WrongFilterException("Gli orari forniti nel filtro della fascia oraria (range) non sono corretti.");
             }
         } else {
             // orario singolo fornito, controllo se è valido
             try {
                 LocalTime time = LocalTime.parse(requestBody.getString("range"));
             } catch (DateTimeParseException e) {
-                // orario fornito non valido
-                return false;
+                throw new WrongFilterException("L'orario nel filtro della fascia oraria (range) non è corretto.");
             }
         }
 

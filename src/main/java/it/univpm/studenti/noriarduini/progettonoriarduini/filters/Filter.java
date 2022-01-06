@@ -1,12 +1,13 @@
 package it.univpm.studenti.noriarduini.progettonoriarduini.filters;
 
+import it.univpm.studenti.noriarduini.progettonoriarduini.exceptions.WrongFilterException;
 import it.univpm.studenti.noriarduini.progettonoriarduini.model.Feed;
 import org.json.JSONObject;
 
 public interface Filter {
     // metodo che controlla se il filtro è presente ed è stato scritto correttamente
-    public boolean check(JSONObject requestBody);
+    public boolean check(JSONObject requestBody) throws WrongFilterException;
 
     // metodo che filtra i post del feed
-    public Feed filter(JSONObject requestBody, Feed feed);
+    public Feed filter(JSONObject requestBody, Feed feed) throws WrongFilterException;
 }

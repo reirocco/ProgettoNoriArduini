@@ -1,6 +1,7 @@
 package it.univpm.studenti.noriarduini.progettonoriarduini.filters;
 
 import it.univpm.studenti.noriarduini.progettonoriarduini.ProgettoNoriArduiniApplication;
+import it.univpm.studenti.noriarduini.progettonoriarduini.exceptions.WrongFilterException;
 import it.univpm.studenti.noriarduini.progettonoriarduini.model.Feed;
 import it.univpm.studenti.noriarduini.progettonoriarduini.service.Request;
 import it.univpm.studenti.noriarduini.progettonoriarduini.view.Logger;
@@ -16,15 +17,14 @@ import java.util.Locale;
 
 public class DateFilter implements Filter{
     @Override
-    public boolean check(JSONObject requestBody) {
+    public boolean check(JSONObject requestBody) throws WrongFilterException {
         // controllo se la data su since è presente ed è corretta. in caso dovesse essere errata o mancante
         // il filtro verrà considerato non valido e quindi non verrà applicato alcun filtro nel feed
         if (requestBody.has("since")) {
             try {
                 LocalDate dateSince = LocalDate.parse(requestBody.getString("since"));
             } catch (DateTimeParseException e) {
-                // sollevare eccezione personalizzata - filtro composto male
-                return false;
+                throw new WrongFilterException("La data di inizio (since) per il filtro sui giorni è scritta in modo scorretto");
             }
         }
 
@@ -34,15 +34,15 @@ public class DateFilter implements Filter{
             try {
                 LocalDate dateSince = LocalDate.parse(requestBody.getString("until"));
             } catch (DateTimeParseException e) {
-                // sollevare eccezione personalizzata - filtro composto male
-                return false;
+                throw new WrongFilterException("La data di fine (until) per il filtro sui giorni è scritta in modo scorretto");
             }
         }
 
         return requestBody.has("since") || requestBody.has("until");
     }
 
-    public Feed filter(JSONObject requestBody, Feed fake) {
+    @Override
+    public Feed filter(JSONObject requestBody, Feed fake) throws WrongFilterException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         Locale loc = new Locale("en", "it");
         String payload = "";
@@ -52,8 +52,7 @@ public class DateFilter implements Filter{
                 LocalDate dateTime = LocalDate.parse(requestBody.getString("since"), formatter);
                 payload += "&since=" + dateTime.getDayOfMonth() + "+" + dateTime.getMonth().getDisplayName(TextStyle.FULL, loc) + "+" + dateTime.getYear();
             } catch (DateTimeParseException e) {
-                Logger.printErrorMessage(e.getMessage());
-                throw e;
+                throw new WrongFilterException("Impossibile ottenere la data di inizio (since) del filtro sui giorni: " + e.getMessage());
             }
         }
 
@@ -62,7 +61,7 @@ public class DateFilter implements Filter{
                 LocalDate dateTime = LocalDate.parse(requestBody.getString("until"), formatter);
                 payload += "&until=" + dateTime.getDayOfMonth() + "+" + dateTime.getMonth().getDisplayName(TextStyle.FULL, loc) + "+" + dateTime.getYear();
             } catch (DateTimeParseException e) {
-                Logger.printErrorMessage(e.getMessage());
+                throw new WrongFilterException("Impossibile ottenere la data di fine (until) del filtro sui giorni: " + e.getMessage());
             }
         }
 

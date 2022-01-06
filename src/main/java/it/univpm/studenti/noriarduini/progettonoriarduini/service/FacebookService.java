@@ -1,22 +1,26 @@
 package it.univpm.studenti.noriarduini.progettonoriarduini.service;
 
 import it.univpm.studenti.noriarduini.progettonoriarduini.ProgettoNoriArduiniApplication;
+import it.univpm.studenti.noriarduini.progettonoriarduini.exceptions.WrongFilterException;
 import it.univpm.studenti.noriarduini.progettonoriarduini.filters.DateFilter;
 import it.univpm.studenti.noriarduini.progettonoriarduini.filters.KeyWordsFilter;
 import it.univpm.studenti.noriarduini.progettonoriarduini.filters.TimeFilter;
 import it.univpm.studenti.noriarduini.progettonoriarduini.model.Feed;
+import it.univpm.studenti.noriarduini.progettonoriarduini.view.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
+import java.time.DateTimeException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Service
 public class FacebookService {
-    public static JSONObject getUserStats() {
+    public static JSONObject getUserStats() throws HttpClientErrorException, DateTimeException {
         // ottenimento del JSON dell'intero feed
         Request request = new Request(new RestTemplateBuilder());
         JSONArray feedRaw = new JSONArray(request.jsonArrayGetRequest("https://graph.facebook.com/me/feed?access_token=" + ProgettoNoriArduiniApplication.conf.getAccessToken() + "&limit=200"));
@@ -45,7 +49,7 @@ public class FacebookService {
         return result;
     }
 
-    public static JSONObject getFilteredResults(String json) {
+    public static JSONObject getFilteredResults(String json) throws HttpClientErrorException, WrongFilterException {
         // ottengo tutto il feed dell'utente
         Request request = new Request(new RestTemplateBuilder());
         JSONObject requestBody = new JSONObject(json);
@@ -59,10 +63,18 @@ public class FacebookService {
         // controllo se i filtri sono validi - se lo sono filtro i post
         if (dateFilter.check(requestBody))
             feed = dateFilter.filter(requestBody, feed);
+        else
+            Logger.printInfoMessage("Il filtro per data non verrà applicato.");
+
         if (timeFilter.check(requestBody))
             feed = timeFilter.filter(requestBody, feed);
+        else
+            Logger.printInfoMessage("Il filtro per fascia oraria non verrà applicato.");
+
         if (keyWordsFilter.check(requestBody))
             feed = keyWordsFilter.filter(requestBody, feed);
+        else
+            Logger.printInfoMessage("Il filtro per parole chiave non verrà applicato");
 
         // ritorno il feed filtrato
         JSONObject result = new JSONObject();
