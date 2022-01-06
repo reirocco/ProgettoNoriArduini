@@ -13,7 +13,7 @@ public class ProgettoNoriArduiniApplication {
     // questo oggetto contiene tutte le configurazioni necessarie per il corretto funzionamento dell'app
     public static Configuration conf = new Configuration();
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
         // saluto l'utente
         Logger.printInfoMessage("Facebook API server - di Federico Arduini e Rocco Nori");
         Logger.printInfoMessage("Realizzato per il progetto di OOP dell'Università Politecnica delle Marche");

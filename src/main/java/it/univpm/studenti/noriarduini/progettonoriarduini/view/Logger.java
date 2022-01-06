@@ -23,16 +23,18 @@ public class Logger {
         System.out.println("--------------------------------------------------------------------------------");
     }
 
-    public static void printServerUrl() throws FileNotFoundException {
+    public static void printServerUrl() {
         BufferedReader reader = null;
         String path = System.getProperty("user.dir");
         Boolean find = false;
         String port = "";
+
         try {
             reader = new BufferedReader(new FileReader(path + "/src/main/resources/application.properties"));
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            Logger.printErrorMessage("Impossibile leggere il file application.properties: " + e.getMessage());
         }
+
         if (reader != null) {
             try {
                 String line = reader.readLine();
@@ -51,13 +53,15 @@ public class Logger {
                 e.printStackTrace();
             }
         }
+
         String ip = "";
         try (final DatagramSocket socket = new DatagramSocket()) {
             socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
             ip = socket.getLocalAddress().getHostAddress();
         } catch (SocketException | UnknownHostException e) {
-            e.printStackTrace();
+            Logger.printErrorMessage("Impossibile ottenere l'indirizzo IP del tuo PC: " + e.getMessage());
         }
+
         System.out.println("Machine address:");
         System.out.println(" --> http://localhost:" + port);
         System.out.println(" --> http://127.0.0.1:" + port);

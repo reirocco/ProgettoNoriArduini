@@ -38,7 +38,7 @@ public class Configuration {
             JSONObject jsonObject = new JSONObject(jsonContent);
             this.accessToken = (String) jsonObject.get("access_token");
         } catch (IOException e) {
-            Logger.printErrorMessage("Impossibile caricare le configurazioni del server: errore di I/O (probabilmente il file non esiste)");
+            Logger.printErrorMessage("Impossibile caricare le configurazioni del server: errore di I/O (probabilmente il file non esiste). Maggiori dettagli: " + e.getMessage());
         }
     }
 
@@ -53,7 +53,7 @@ public class Configuration {
                 this.dataSet.add((String) x);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.printErrorMessage("Impossibile caricare il dataset delle parole: errore di I/O (probabilmente il file dataset.json non esiste). Maggiori dettagli: " + e.getMessage());
         }
     }
 }
