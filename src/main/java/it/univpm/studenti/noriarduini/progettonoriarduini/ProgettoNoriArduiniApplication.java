@@ -1,5 +1,6 @@
 package it.univpm.studenti.noriarduini.progettonoriarduini;
 
+import it.univpm.studenti.noriarduini.progettonoriarduini.utility.AccessTokenTest;
 import it.univpm.studenti.noriarduini.progettonoriarduini.utility.Configuration;
 import it.univpm.studenti.noriarduini.progettonoriarduini.view.Logger;
 import org.springframework.boot.SpringApplication;
@@ -26,7 +27,11 @@ public class ProgettoNoriArduiniApplication {
         Logger.printInfoMessage("Avvio del server Spring in corso...");
         SpringApplication.run(ProgettoNoriArduiniApplication.class, args);
 
-        // comunico che il server spring è stato avviato correttamente
+        // vado a controllare se il token di accesso è valido, se non lo è lo comunico all'utente
+        if (!AccessTokenTest.tokenIsValid())
+            Logger.printErrorMessage("Il token di accesso fornito non è più valido. Modificare il file config/config.json e inserire un access token valido.");
+
+        // comunico che il server spring è stato avviato correttamente ed è pronto all'uso
         Logger.printInfoMessage("Server Spring avviato correttamente. Da adesso è possibile effettuare tutte le chiamate verso questo server all'indirizzo:");
         Logger.printServerUrl();
     }

@@ -1,8 +1,12 @@
 package it.univpm.studenti.noriarduini.progettonoriarduini.utility;
 
+import it.univpm.studenti.noriarduini.progettonoriarduini.ProgettoNoriArduiniApplication;
+import it.univpm.studenti.noriarduini.progettonoriarduini.service.Request;
 import it.univpm.studenti.noriarduini.progettonoriarduini.view.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,6 +26,10 @@ public class Configuration {
 
     public String getAccessToken() {
         return this.accessToken;
+    }
+
+    public ArrayList<String> getDataSet() {
+        return this.dataSet;
     }
 
     public void loadConfigurations() {
@@ -47,9 +55,5 @@ public class Configuration {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public ArrayList<String> getDataSet() {
-        return this.dataSet;
     }
 }

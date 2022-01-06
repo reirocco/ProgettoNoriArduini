@@ -16,6 +16,10 @@ public class Request {
         this.restTemplate = restTemplateBuilder.build();
     }
 
+    public String plainTextGetRequest(String url) throws HttpClientErrorException {
+        return this.restTemplate.getForObject(url, String.class);
+    }
+
     /* metodo che permette di effettuare una richiesta GET all'url desiderato e ne ritorna il risultato come stringa
      * il metodo adotta una approccio ricorsivo poichè i json ritornati dalle API di facebook sono limitati ad un numero
      * massimo di elementi (si può regolare il massimo impostando il parametro LIMIT), è necessagio quindi usare i link di
@@ -25,13 +29,10 @@ public class Request {
      * @param url è la stringa contenente l'url con i parametri della richiesta da effettuare
      * @return JSONArray contiene tutti gli elementi della richiesta
     */
-    public JSONArray jsonArrayGetRequest(String url) {
+    public JSONArray jsonArrayGetRequest(String url) throws HttpClientErrorException{
         String tmp = "{}";
-        try {
-            tmp = this.restTemplate.getForObject(url, String.class, 1);
-        }catch(HttpClientErrorException e){
-            throw e;
-        }
+        tmp = this.restTemplate.getForObject(url, String.class, 1);
+
         JSONObject j = new JSONObject(tmp);
         JSONArray array = new JSONArray();
         if (j.has("data")){
@@ -42,5 +43,4 @@ public class Request {
         }
         return array;
     }
-
 }

@@ -65,26 +65,6 @@ public class Post {
         return found;
     }
 
-/*
-    public Pair<Integer, String> hasKeyWordsWithDictionary(ArrayList<String> dataset) {
-        Map<String, String> map = new HashMap<String, String>();
-        Pair<>
-        for (String s : dataset) {
-            if (this.message.contains(s)) {
-                if (!map.containsKey(s)) {
-                    int count = StringUtils.countOccurrencesOf(this.message, s);
-                    map.put(s, String.valueOf(count));
-                } else {
-                    int num = Integer.valueOf(map.get(s));
-                    map.replace(s, String.valueOf(num), String.valueOf(num + 1));
-                }
-            }
-        }
-        return
-    }
-
- */
-
     public JSONObject exportToJSONObject() {
         JSONObject j = new JSONObject();
 
