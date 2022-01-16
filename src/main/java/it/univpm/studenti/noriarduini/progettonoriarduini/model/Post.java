@@ -1,11 +1,14 @@
 package it.univpm.studenti.noriarduini.progettonoriarduini.model;
 
+import it.univpm.studenti.noriarduini.progettonoriarduini.utility.Splitter;
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Locale;
+import java.util.Arrays;
+import java.util.Iterator;
 
 public class Post {
     private String message;
@@ -51,15 +54,36 @@ public class Post {
         this.dataOraPubblicazione = dataOraPubblicazione;
     }
 
-    public boolean hasKeyWords(ArrayList<String> dataset) {
+    public boolean hasKeyWords(ArrayList<String> dataset, boolean full_words, boolean case_sensitive) {
         boolean found = false;
 
-        for (String x : dataset) {
+        Iterator datasetIterator = Arrays.stream(dataset.toArray()).iterator();
+        while (!found && datasetIterator.hasNext()) {
+            String next = datasetIterator.next().toString();
+            System.err.println(next);
             // versione case insensitive
             //if (!found && this.getMessage().toLowerCase().contains(x.toLowerCase())) found = true;
 
+            boolean res = false;
+            // controllo parole intere
+            if (full_words) {
+                String[] messageWords = Splitter.split(this.message);
+                Iterator iter = Arrays.stream(messageWords).iterator();
+                while (!res && iter.hasNext()) {
+                    if (case_sensitive)
+                        res = iter.next().toString().equals(next);
+                    else
+                        res = iter.next().toString().equalsIgnoreCase(next);
+                }
+            } else {
+                if (case_sensitive)
+                    res = this.getMessage().contains(next);
+                else {
+                    res = StringUtils.containsIgnoreCase(this.message, next);
+                }
+            }
             // versione case sensitive
-            if (!found && this.getMessage().contains(x)) found = true;
+            if (!found && res) found = true;
         }
 
         return found;
@@ -74,4 +98,16 @@ public class Post {
 
         return j;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean res = false;
+        if (obj.getClass() == Post.class) {
+            if (this.id.equals(((Post) obj).id)) {
+                res = true;
+            }
+        }
+        return res;
+    }
+
 }

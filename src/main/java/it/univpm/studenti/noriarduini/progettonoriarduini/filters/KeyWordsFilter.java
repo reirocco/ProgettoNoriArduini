@@ -20,15 +20,21 @@ public class KeyWordsFilter implements Filter {
     public Feed filter(JSONObject requestBody, Feed feed) {
         ArrayList<String> s;
         boolean useDict = false;
-
+        /*
+            controllo se è stato inserito il filtro per le parole intere e per il case sensitive:
+            --> se è stato inserito controllo che sia stato inserito un boolean, se lo è prendo il valore di quest'ultimo,
+            altrimenti imposto false;
+            --> se non è stato inserito imposto il valore a false
+         */
+        boolean full_words = requestBody.has("full_words") && (requestBody.get("full_words").toString().equalsIgnoreCase("true") || requestBody.get("full_words").toString().equalsIgnoreCase("false") && (boolean) requestBody.get("full_words"));
+        boolean case_sensitive = requestBody.has("case_sensitive") && (requestBody.get("case_sensitive").toString().equalsIgnoreCase("true") || requestBody.get("case_sensitive").toString().equalsIgnoreCase("false") && (boolean) requestBody.get("case_sensitive"));
         if (requestBody.has("keywords")) {
             JSONArray array = requestBody.getJSONArray("keywords");
-
             if (requestBody.has("dictionary"))
                 useDict = requestBody.getBoolean("dictionary");
 
             // ottengo le keywords che serviranno per filtrare i post
-            if (!array.isEmpty()) {
+            if (array.length() > 0) {
                 s = new ArrayList<String>();
                 for (int i = 0; i < array.length(); i++) {
                     s.add(array.getString(i));
@@ -47,9 +53,9 @@ public class KeyWordsFilter implements Filter {
 
                 if (useDict) {
                     PostDictionary pd = new PostDictionary(p);
-                    if (pd.hasKeyWords(s)) res.addPost(pd);
+                    if (pd.hasKeyWords(s, full_words, case_sensitive)) res.addPost(pd);
                 } else {
-                    if (p.hasKeyWords(s)) res.addPost(p);
+                    if (p.hasKeyWords(s, full_words, case_sensitive)) res.addPost(p);
                 }
             }
             return res;

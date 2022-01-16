@@ -1,12 +1,10 @@
 package it.univpm.studenti.noriarduini.progettonoriarduini;
 
-import it.univpm.studenti.noriarduini.progettonoriarduini.utility.AccessTokenTest;
+import it.univpm.studenti.noriarduini.progettonoriarduini.utility.AccessTokenValidator;
 import it.univpm.studenti.noriarduini.progettonoriarduini.utility.Configuration;
 import it.univpm.studenti.noriarduini.progettonoriarduini.view.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.io.FileNotFoundException;
 
 @SpringBootApplication
 public class ProgettoNoriArduiniApplication {
@@ -28,7 +26,7 @@ public class ProgettoNoriArduiniApplication {
         SpringApplication.run(ProgettoNoriArduiniApplication.class, args);
 
         // vado a controllare se il token di accesso è valido, se non lo è lo comunico all'utente
-        if (!AccessTokenTest.tokenIsValid())
+        if (!AccessTokenValidator.tokenIsValid())
             Logger.printErrorMessage("Il token di accesso fornito non è più valido. Modificare il file config/config.json e inserire un access token valido.");
 
         // comunico che il server spring è stato avviato correttamente ed è pronto all'uso

@@ -6,7 +6,7 @@ import org.json.JSONObject;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.web.client.HttpClientErrorException;
 
-public class AccessTokenTest {
+public class AccessTokenValidator {
     public static JSONObject testTokenValidity() {
         Request request = new Request(new RestTemplateBuilder());
         String response;
@@ -25,7 +25,7 @@ public class AccessTokenTest {
     }
 
     public static boolean tokenIsValid() {
-        JSONObject testObj = AccessTokenTest.testTokenValidity();
+        JSONObject testObj = AccessTokenValidator.testTokenValidity();
         String validity = testObj.getString("access_token");
 
         return validity.equals("VALID");

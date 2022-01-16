@@ -1,10 +1,8 @@
 package it.univpm.studenti.noriarduini.progettonoriarduini.controller;
 
-import it.univpm.studenti.noriarduini.progettonoriarduini.ProgettoNoriArduiniApplication;
 import it.univpm.studenti.noriarduini.progettonoriarduini.exceptions.WrongFilterException;
 import it.univpm.studenti.noriarduini.progettonoriarduini.service.FacebookService;
-import it.univpm.studenti.noriarduini.progettonoriarduini.utility.AccessTokenTest;
-import it.univpm.studenti.noriarduini.progettonoriarduini.utility.Configuration;
+import it.univpm.studenti.noriarduini.progettonoriarduini.utility.AccessTokenValidator;
 import it.univpm.studenti.noriarduini.progettonoriarduini.view.Logger;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,6 +57,6 @@ public class APIController {
 
     @RequestMapping("/tokenTest")
     public Map<String, Object> tokenTest() {
-        return AccessTokenTest.testTokenValidity().toMap();
+        return AccessTokenValidator.testTokenValidity().toMap();
     }
 }
