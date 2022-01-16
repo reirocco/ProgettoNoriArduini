@@ -8,28 +8,47 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * Rappresenta una richiesta HTTP verso un URL.
+ */
 @Service
 public class Request {
     private final RestTemplate restTemplate;
 
+    /**
+     * Istanzia un oggetto di tipo Request.
+     * @param restTemplateBuilder Builder che viene usato per creare una <code>RestTemplate</code>, ovvero un modello
+     *                            per la realizzazione di client HTTP.
+     */
     public Request(@NotNull RestTemplateBuilder restTemplateBuilder) {
         this.restTemplate = restTemplateBuilder.build();
     }
 
+    /**
+     * Effettua una richiesta HTTP in GET all'URL fornito e ne ritorna la risposta testuale (plain text)
+     *
+     * @param url Indirizzo verso cui fare la richiesta
+     * @return Testo contenente la risposta della richiesta
+     * @throws HttpClientErrorException Quando la richiesta non va a buon fine e si ottiene un errore HTTP. Maggiori
+     * informazioni sui codici di stato HTTP su <a href="https://it.wikipedia.org/wiki/Codici_di_stato_HTTP">questo indirizzo</a>.
+     */
     public String plainTextGetRequest(String url) throws HttpClientErrorException {
         return this.restTemplate.getForObject(url, String.class);
     }
 
-    /* metodo che permette di effettuare una richiesta GET all'url desiderato e ne ritorna il risultato come stringa
-     * il metodo adotta una approccio ricorsivo poichè i json ritornati dalle API di facebook sono limitati ad un numero
-     * massimo di elementi (si può regolare il massimo impostando il parametro LIMIT), è necessagio quindi usare i link di
-     * paginazione messi a disposizione nello stesso per poter scorrere tutte le pagine fino alla fine e quindi recuperare
+    /**
+     * Effettua una richiesta HTTP in GET all'url fornito e ne ritorna il risultato sotto forma di <code>JSONArray</code>.<br>
+     * Il metodo adotta un approccio ricorsivo poiché i JSON ritornati dalle API di Facebook sono limitati a un numero
+     * massimo di elementi (si può regolare il massimo impostando il parametro LIMIT); è necessario quindi usare i link di
+     * paginazione contenuti nel JSON di risposta per poter scorrere tutte le pagine fino all'ultima e quindi recuperare
      * tutti gli elementi.
      *
-     * @param url è la stringa contenente l'url con i parametri della richiesta da effettuare
-     * @return JSONArray contiene tutti gli elementi della richiesta
+     * @param url Indirizzo verso cui fare la richiesta
+     * @return <code>JSONArray</code> che contiene tutti i dati ottenuti dalla richiesta
+     * @throws HttpClientErrorException Quando la richiesta non va a buon fine e si ottiene un errore HTTP. Maggiori
+     * informazioni sui codici di stato HTTP su <a href="https://it.wikipedia.org/wiki/Codici_di_stato_HTTP">questo indirizzo</a>.
     */
-    public JSONArray jsonArrayGetRequest(String url) throws HttpClientErrorException{
+    public JSONArray jsonArrayGetRequest(String url) throws HttpClientErrorException {
         String tmp = "{}";
         tmp = this.restTemplate.getForObject(url, String.class, 1);
 

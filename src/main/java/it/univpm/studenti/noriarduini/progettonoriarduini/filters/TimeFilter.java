@@ -6,12 +6,42 @@ import it.univpm.studenti.noriarduini.progettonoriarduini.model.Post;
 import org.json.JSONObject;
 
 import java.time.LocalTime;
-import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.regex.PatternSyntaxException;
 
+/**
+ * Permette di filtrare il feed dell'utente, mostrando solamente i post che soddisfano delle condizioni temporali.
+ *
+ * <h2>Composizione del JSON dei filtri</h2>
+ * Per applicare i filtri sull'orario il JSON dei filtri viene composto così:<br><br>
+ * <code>
+ *     {
+ *         "range": 10:00-12:30
+ *     }
+ * </code><br>
+ * In questo caso viene indicato che il filtro prenderà tutti i post che sono stati pubblicati in un orario compreso
+ * tra i due orari indicati dentro <code>range</code>.<br><br>
+ *
+ * <code>
+ *     {
+ *         "range": 10:00
+ *     }
+ * </code><br>
+ * In questo caso viene indicato che il filtro prenderà tutti i post che sono stati pubblicati a partire dall'orario
+ * indicato in <code>range</code>.
+ *
+ * <strong>Gli orari sono scritti secondo il formato <code>HH:mm</code> (ore:minuti).</strong>
+ */
 public class TimeFilter implements Filter{
+    /**
+     * Permette di verificare se il filtro per la fascia oraria è stato inserito correttamente. Per informazioni sulla
+     * composizione del filtro della fascia oraria, vedere la classe <code>TimeFilter</code>.
+     * @param requestBody JSON dei filtri, che è nel body della richiesta.
+     * @return <code>true</code> se il filtro è stato composto correttamente, <code>false</code> in caso contrario
+     * @throws WrongFilterException se gli orari contenuti in <code>since</code> non sono scritti correttamente.
+     * @see TimeFilter
+     */
     @Override
     public boolean check(JSONObject requestBody) throws WrongFilterException {
         // controllo se è presente innanzitutto la chiave "range"
@@ -43,6 +73,12 @@ public class TimeFilter implements Filter{
         return true;
     }
 
+    /**
+     * Applica il filtro per la fascia oraria di pubblicazione dei post.
+     * @param requestBody JSON dei filtri, che è nel body della richiesta.
+     * @param feed Feed in input
+     * @return <code>Feed</code> contenente i post che soddisfano le condizioni del filtro.
+     */
     @Override
     public Feed filter(JSONObject requestBody, Feed feed) {
         // ottengo gli orari
@@ -78,8 +114,13 @@ public class TimeFilter implements Filter{
         return filteredFeed;
     }
 
-    // questa funzione riceve in input il range orario e controlla se ci sono due orari (separati da -)
-    // ad esempio 20:00-22:00
+    /**
+     * Permette di stabilire se in una stringa sono inseriti uno o due orari.
+     *
+     * @param range Stringa che contiene l'orario/gli orari (separati dal "-")
+     * @return array di stringhe che contiene in posizione 0 il primo orario e in posizione 1 il secondo. In caso di orario
+     * singolo ritorna un array di stringhe con solo la posizione 0.
+     */
     private String[] twoItemsRange(String range) {
         String[] times;
 

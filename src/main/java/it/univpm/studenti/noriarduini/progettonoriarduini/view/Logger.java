@@ -9,20 +9,37 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
+/**
+ * Permette di gestire la stampa delle informazioni sul programma sulla console.
+ */
 public class Logger {
 
+    /**
+     * Stampa un messaggio d'informazione sulla console.
+     * @param msg Messaggio da stampare
+     */
     public static void printInfoMessage(String msg) {
         System.out.println("[ SERVER ] " + msg);
     }
 
+    /**
+     * Stampa un messaggio di errore sulla console. Il messaggio sarà rosso.
+     * @param msg Messaggio di errore da stampare
+     */
     public static void printErrorMessage(String msg) {
         System.err.println("[ SERVER ERROR! ] Errore - " + msg);
     }
 
+    /**
+     * Stampa una linea separatrice sulla console.
+     */
     public static void printSeparator() {
         System.out.println("--------------------------------------------------------------------------------");
     }
 
+    /**
+     * Stampa nella console l'URL di questo server e la porta in cui è avviato.
+     */
     public static void printServerUrl() {
         BufferedReader reader = null;
         String path = System.getProperty("user.dir");
