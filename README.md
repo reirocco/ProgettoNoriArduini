@@ -3,7 +3,22 @@
 Applicazione che permette di fare statistiche sui post di un utente Facebook e di filtrarli per giorni, fasce orarie e parole chiave.
 
 ## Indice
--- qui va l'indice --
+- [Descrizione dell'applicazione](#descrizione-dellapplicazione)
+  - [Cosa permette di fare la nostra app](#cosa-permette-di-fare-la-nostra-app)
+- [Installazione dell'app su PC](#installazione-dellapp-sul-pc)
+  - [Download del progetto](#download-del-progetto)
+  - [Avvio dell'applicazione](#avvio-dellapplicazione)
+  - [Apertura con IntelliJ IDEA](#apertura-con-intellij-idea)
+- [Funzionamento del programma](#funzionamento-del-programma)
+  - [Ottenere l'access token](#ottenere-laccess-token)
+  - [Rotte della nostra API](#rotte-della-nostra-api)
+    - [Statistiche dei post](#statistiche-dei-post)
+    - [Filtraggio dei post](#filtraggio-dei-post)
+      - [Filtro per data di pubblicazione](#filtro-per-data-di-pubblicazione)
+      - [Filtro per fascia oraria di pubblicazione](#filtro-per-fascia-oraria-di-pubblicazione)
+      - [Filtro per parole chiave](#filtro-per-parole-chiave)
+- [Realizzazione](#realizzazione)
+- [Autori](#autori)
 
 ## Descrizione dell'applicazione
 La nostra applicazione permette di fare delle statistiche sulla frequenza temporale con cui l'utente carica i post sul suo feed di Facebook; inoltre consente anche di ottenere la lista dei suoi post pubblicati e filtrarla in base a:
@@ -125,5 +140,5 @@ Per la realizzazione del progetto sono stati usati:
 - **[JUnit 5](https://junit.org/junit5/)**: per la stesura dei tester per la funzionalità del programma.
 
 ## Autori
-- [Federico Arduini](https://github.com/faffolao) (contributo al 50%)
-- [Rocco Nori](https://github.com/reirocco) (contributo al 50%)
+- [Federico Arduini](https://github.com/faffolao) (contributo al 55%)
+- [Rocco Nori](https://github.com/reirocco) (contributo al 45%)
