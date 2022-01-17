@@ -26,7 +26,7 @@ La nostra applicazione permette di fare delle statistiche sulla frequenza tempor
 - fascia oraria di pubblicazione;
 - parole chiave contenute.
 
-Le parole chiave possono essere sia inserite manualmente dall'utente (*vedere sezione Filtri*), e sia caricate da un dataset di parole, che si trova nel file `config/dataset.json`. In questo modo, se il dataset contiene un certo insieme di parole (in questo caso parole a sfondo politico) il nostro applicativo è in grado di filtrare i post e ottenere solamente quelli a sfondo politico (quindi quelli che contengono le parole contenute nel dataset).
+Le parole chiave possono essere sia inserite manualmente dall'utente (*vedere sezione [Filtro per parole chiave](#filtro-per-parole-chiave)*), e sia caricate da un dataset di parole, che si trova nel file `config/dataset.json`. In questo modo, se il dataset contiene un certo insieme di parole (in questo caso parole a sfondo politico) il nostro applicativo è in grado di filtrare i post e ottenere solamente quelli a sfondo politico (quindi quelli che contengono le parole contenute nel dataset).
 
 ### Cosa permette di fare la nostra app
 ✅ Statistiche sui post di un utente in base al periodo di pubblicazione<br>
@@ -38,9 +38,9 @@ Le parole chiave possono essere sia inserite manualmente dall'utente (*vedere se
 
 ## Installazione dell'app sul PC
 #### Download del progetto
-Scaricare il contenuto di questa repository sul proprio PC. Si può fare direttamente dalla pagina GitHub di questa repo cliccando sul tasto verde **Code** e selezionando **Download as ZIP**. In alternativa, per chi possiede il client a riga di comando di Git (reperibile a [questo indirizzo](https://git-scm.com/downloads)), è possibile effettuare il clone del progetto utilizzando:
+Scaricare il contenuto di questa repository sul proprio PC. Si può fare direttamente dalla pagina GitHub di questa repo cliccando sul tasto verde `Code` e selezionando `Download as ZIP`. In alternativa, per chi possiede il client a riga di comando di Git (reperibile a [questo indirizzo](https://git-scm.com/downloads)), è possibile effettuare il clone del progetto utilizzando:
 ```
-   git clone https://github.com/reirocco/ProgettoNoriArduini.git
+git clone https://github.com/reirocco/ProgettoNoriArduini.git
 ```
 ![Download da GitHub](https://i.ibb.co/SfFBnFW/Immagine-2022-01-17-114121.png "Download da GitHub")
 ![Clone con Git CLI](https://i.ibb.co/QKHhsPy/Immagine-2022-01-17-114459.png "Clone con GIT CLI")
@@ -48,11 +48,11 @@ Scaricare il contenuto di questa repository sul proprio PC. Si può fare diretta
 #### Avvio dell'applicazione
 Una volta scaricata l'applicazione, è possibile avviarla direttamente con la riga di comando digitando quanto segue:
 ```
-    mvnw.cmd spring-boot:run
+mvnw.cmd spring-boot:run
 ```
 (per computer Windows)
 ```
-    ./mvnw spring-boot:run
+./mvnw spring-boot:run
 ```
 (per macOS o Linux)
 
@@ -95,7 +95,8 @@ Permette di fare una statistica dei post che sono stati pubblicati dall'utente i
 - questa settimana;
 - questo mese;
 - quest'anno;
-- l'anno scorso.
+- l'anno scorso;
+- dalla creazione dell'account (post totali).
 
 ![Esempio di risultato delle statistiche](https://i.ibb.co/2g8CswB/Immagine-2022-01-17-123019.png "Esempio di risultato delle statistiche")
 
