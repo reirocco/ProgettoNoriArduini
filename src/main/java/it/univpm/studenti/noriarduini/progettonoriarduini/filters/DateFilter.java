@@ -21,8 +21,8 @@ import java.util.Locale;
  * Per applicare i filtri sulle date il JSON dei filtri viene composto così:<br><br>
  * <code>
  *     {
- *         "since": 2021-12-24,
- *         "until": 2022-01-17
+ *         "since": "2021-12-24",
+ *         "until": "2022-01-17"
  *     }
  * </code>
  *

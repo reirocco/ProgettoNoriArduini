@@ -17,7 +17,7 @@ import java.util.regex.PatternSyntaxException;
  * Per applicare i filtri sull'orario il JSON dei filtri viene composto così:<br><br>
  * <code>
  *     {
- *         "range": 10:00-12:30
+ *         "range": "10:00-12:30"
  *     }
  * </code><br>
  * In questo caso viene indicato che il filtro prenderà tutti i post che sono stati pubblicati in un orario compreso
@@ -25,7 +25,7 @@ import java.util.regex.PatternSyntaxException;
  *
  * <code>
  *     {
- *         "range": 10:00
+ *         "range": "10:00"
  *     }
  * </code><br>
  * In questo caso viene indicato che il filtro prenderà tutti i post che sono stati pubblicati a partire dall'orario
