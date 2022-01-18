@@ -1,0 +1,355 @@
+memberSearchIndex = [{
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.utility",
+    "c": "AccessTokenValidator",
+    "l": "AccessTokenValidator()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "DictionaryWord",
+    "l": "addOccurrence()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "Feed",
+    "l": "addPost(Post)",
+    "u": "addPost(it.univpm.studenti.noriarduini.progettonoriarduini.model.Post)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "PostDictionary",
+    "l": "addWord(DictionaryWord)",
+    "u": "addWord(it.univpm.studenti.noriarduini.progettonoriarduini.model.DictionaryWord)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.controller",
+    "c": "APIController",
+    "l": "APIController()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "Feed",
+    "l": "buildFromJsonArray(JSONArray)",
+    "u": "buildFromJsonArray(org.json.JSONArray)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.stats",
+    "c": "Stats",
+    "l": "buildStats(Feed)",
+    "u": "buildStats(it.univpm.studenti.noriarduini.progettonoriarduini.model.Feed)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.filters",
+    "c": "DateFilter",
+    "l": "check(JSONObject)",
+    "u": "check(org.json.JSONObject)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.filters",
+    "c": "Filter",
+    "l": "check(JSONObject)",
+    "u": "check(org.json.JSONObject)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.filters",
+    "c": "KeyWordsFilter",
+    "l": "check(JSONObject)",
+    "u": "check(org.json.JSONObject)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.filters",
+    "c": "TimeFilter",
+    "l": "check(JSONObject)",
+    "u": "check(org.json.JSONObject)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "PostDictionary",
+    "l": "checkOccurrenceExists(String)",
+    "u": "checkOccurrenceExists(java.lang.String)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini",
+    "c": "ProgettoNoriArduiniApplication",
+    "l": "conf"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.utility",
+    "c": "Configuration",
+    "l": "Configuration()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.filters",
+    "c": "DateFilter",
+    "l": "DateFilter()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "DictionaryWord",
+    "l": "DictionaryWord(String)",
+    "u": "%3Cinit%3E(java.lang.String)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "Post",
+    "l": "equals(Object)",
+    "u": "equals(java.lang.Object)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "Post",
+    "l": "exportToJSONObject()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "PostDictionary",
+    "l": "exportToJSONObject()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.service",
+    "c": "FacebookService",
+    "l": "FacebookService()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "Feed",
+    "l": "Feed()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.filters",
+    "c": "DateFilter",
+    "l": "filter(JSONObject, Feed)",
+    "u": "filter(org.json.JSONObject,it.univpm.studenti.noriarduini.progettonoriarduini.model.Feed)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.filters",
+    "c": "Filter",
+    "l": "filter(JSONObject, Feed)",
+    "u": "filter(org.json.JSONObject,it.univpm.studenti.noriarduini.progettonoriarduini.model.Feed)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.filters",
+    "c": "KeyWordsFilter",
+    "l": "filter(JSONObject, Feed)",
+    "u": "filter(org.json.JSONObject,it.univpm.studenti.noriarduini.progettonoriarduini.model.Feed)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.filters",
+    "c": "TimeFilter",
+    "l": "filter(JSONObject, Feed)",
+    "u": "filter(org.json.JSONObject,it.univpm.studenti.noriarduini.progettonoriarduini.model.Feed)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "Feed",
+    "l": "fromFeedToJsonArray(Feed)",
+    "u": "fromFeedToJsonArray(it.univpm.studenti.noriarduini.progettonoriarduini.model.Feed)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.utility",
+    "c": "Configuration",
+    "l": "getAccessToken()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "Post",
+    "l": "getDataOraPubblicazione()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.utility",
+    "c": "Configuration",
+    "l": "getDataSet()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.service",
+    "c": "FacebookService",
+    "l": "getFilteredResults(String)",
+    "u": "getFilteredResults(java.lang.String)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "Post",
+    "l": "getId()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.exceptions",
+    "c": "ProjectException",
+    "l": "getMessage()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.exceptions",
+    "c": "WrongFilterException",
+    "l": "getMessage()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "Post",
+    "l": "getMessage()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.exceptions",
+    "c": "ProjectException",
+    "l": "getMessageAsJson()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.exceptions",
+    "c": "WrongFilterException",
+    "l": "getMessageAsJson()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "DictionaryWord",
+    "l": "getOccurrences()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "Feed",
+    "l": "getPostNumberByTime(LocalDateTime, LocalDateTime)",
+    "u": "getPostNumberByTime(java.time.LocalDateTime,java.time.LocalDateTime)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "Feed",
+    "l": "getSinglePost(int)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "Feed",
+    "l": "getTotalPost()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.service",
+    "c": "FacebookService",
+    "l": "getUserStats()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "DictionaryWord",
+    "l": "getWord()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "Post",
+    "l": "hasKeyWords(ArrayList<String>, boolean, boolean)",
+    "u": "hasKeyWords(java.util.ArrayList,boolean,boolean)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "PostDictionary",
+    "l": "hasKeyWords(ArrayList<String>, boolean, boolean)",
+    "u": "hasKeyWords(java.util.ArrayList,boolean,boolean)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.controller",
+    "c": "APIController",
+    "l": "home()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.service",
+    "c": "Request",
+    "l": "jsonArrayGetRequest(String)",
+    "u": "jsonArrayGetRequest(java.lang.String)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.filters",
+    "c": "KeyWordsFilter",
+    "l": "KeyWordsFilter()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.utility",
+    "c": "Configuration",
+    "l": "loadConfigurations()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.utility",
+    "c": "Configuration",
+    "l": "loadDataset()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.view",
+    "c": "Logger",
+    "l": "Logger()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini",
+    "c": "ProgettoNoriArduiniApplication",
+    "l": "main(String[])",
+    "u": "main(java.lang.String[])"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.service",
+    "c": "Request",
+    "l": "plainTextGetRequest(String)",
+    "u": "plainTextGetRequest(java.lang.String)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "Post",
+    "l": "Post(String, String, LocalDateTime)",
+    "u": "%3Cinit%3E(java.lang.String,java.lang.String,java.time.LocalDateTime)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "Post",
+    "l": "Post(String, String, String)",
+    "u": "%3Cinit%3E(java.lang.String,java.lang.String,java.lang.String)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.controller",
+    "c": "APIController",
+    "l": "postBody(String)",
+    "u": "postBody(java.lang.String)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "PostDictionary",
+    "l": "PostDictionary(Post)",
+    "u": "%3Cinit%3E(it.univpm.studenti.noriarduini.progettonoriarduini.model.Post)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "PostDictionary",
+    "l": "PostDictionary(String, String, LocalDateTime)",
+    "u": "%3Cinit%3E(java.lang.String,java.lang.String,java.time.LocalDateTime)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.view",
+    "c": "Logger",
+    "l": "printErrorMessage(String)",
+    "u": "printErrorMessage(java.lang.String)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.view",
+    "c": "Logger",
+    "l": "printInfoMessage(String)",
+    "u": "printInfoMessage(java.lang.String)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.view",
+    "c": "Logger",
+    "l": "printSeparator()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.view",
+    "c": "Logger",
+    "l": "printServerUrl()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini",
+    "c": "ProgettoNoriArduiniApplication",
+    "l": "ProgettoNoriArduiniApplication()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.exceptions",
+    "c": "ProjectException",
+    "l": "ProjectException()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.service",
+    "c": "Request",
+    "l": "Request(RestTemplateBuilder)",
+    "u": "%3Cinit%3E(org.springframework.boot.web.client.RestTemplateBuilder)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "Post",
+    "l": "setDataOraPubblicazione(LocalDateTime)",
+    "u": "setDataOraPubblicazione(java.time.LocalDateTime)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "Post",
+    "l": "setId(String)",
+    "u": "setId(java.lang.String)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.model",
+    "c": "Post",
+    "l": "setMessage(String)",
+    "u": "setMessage(java.lang.String)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.utility",
+    "c": "Splitter",
+    "l": "split(String)",
+    "u": "split(java.lang.String)"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.utility",
+    "c": "Splitter",
+    "l": "Splitter()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.controller",
+    "c": "APIController",
+    "l": "stats()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.stats",
+    "c": "Stats",
+    "l": "Stats()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.utility",
+    "c": "AccessTokenValidator",
+    "l": "testTokenValidity()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.filters",
+    "c": "TimeFilter",
+    "l": "TimeFilter()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.utility",
+    "c": "AccessTokenValidator",
+    "l": "tokenIsValid()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.controller",
+    "c": "APIController",
+    "l": "tokenTest()"
+}, {
+    "p": "it.univpm.studenti.noriarduini.progettonoriarduini.exceptions",
+    "c": "WrongFilterException",
+    "l": "WrongFilterException(String)",
+    "u": "%3Cinit%3E(java.lang.String)"
+}];
+updateSearchResults();

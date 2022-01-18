@@ -6,11 +6,28 @@ import it.univpm.studenti.noriarduini.progettonoriarduini.view.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * <b>ProgettoNoriArduiniApplication class</b>
+ * <p>
+ * La classe provvede alla definizione delle rotte richiamabili tramite chiamata HTTP da un host generico.
+ * <p>
+ *
+ * @author Rocco Nori
+ * @author Federico Arduini
+ * @version 1.0
+ * @since 2022-01-16
+ */
 @SpringBootApplication
 public class ProgettoNoriArduiniApplication {
-    // questo oggetto contiene tutte le configurazioni necessarie per il corretto funzionamento dell'app
+    /**
+     * contiene tutte le configurazioni necessarie per il corretto funzionamento dell'app
+     */
     public static Configuration conf = new Configuration();
 
+    /**
+     * metodo principale del progetto, effettua le operazioni preliminari e poi avvia il server Spring boot
+     * @param args array
+     */
     public static void main(String[] args) {
         // saluto l'utente
         Logger.printInfoMessage("Facebook API server - di Federico Arduini e Rocco Nori");

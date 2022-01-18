@@ -122,18 +122,32 @@ Il formato delle date è `YYYY-mm-dd` (anno-mese-giorno). Nessuno dei due filtri
 Il formato degli orari è `hh:mm` (ore:minuti).
 
 ##### Filtro per parole chiave
-- `keywords`: array che contiene le parole chiave che devono essere incluse nel testo dei post. Se viene specificato un array vuoto (`[]`), indica che le parole chiave verranno prese dal dataset contenuto in `config/dataset.json`.
-- `dictionary`: valore di default: `false`. Se impostato a `true` indica che per ogni post viene visualizzato anche quante parole chiave compaiono nel testo di tale post e le loro quantità.
-- `full_words`: valore di default: `false`. Se impostato a `true` indica che bisogna includere solamente le parole intere, e non anche le parti di parole.
-- `case_sensitive`: valore di default: `false`. Se impostato a `true` indica che verrà fatta distinzione tra le lettere maiuscole e minuscole.
+- `keywords`: array che contiene le parole chiave che devono essere incluse nel testo dei post. Se viene specificato un
+  array vuoto (`[]`), indica che le parole chiave verranno prese dal dataset contenuto in `config/dataset.json`.
+- `dictionary`: valore di default: `false`. Se impostato a `true` indica che per ogni post viene visualizzato anche
+  quante parole chiave compaiono nel testo di tale post e le loro quantità.
+- `full_words`: valore di default: `false`. Se impostato a `true` indica che bisogna includere solamente le parole
+  intere, e non anche le parti di parole.
+- `case_sensitive`: valore di default: `false`. Se impostato a `true` indica che verrà fatta distinzione tra le lettere
+  maiuscole e minuscole.
 
-Per poter fare il filtraggio in base alle parole chiave e poter usare le opzioni `dictionary`, `full_words` e `case_sensitive` è obbligatorio includere `keywords`.
+Per poter fare il filtraggio in base alle parole chiave e poter usare le opzioni `dictionary`, `full_words`
+e `case_sensitive` è obbligatorio includere `keywords`.
 
 *Esempio di filtraggio per parole chiave del dataset, con dizionario e solo parole intere:*
 ![Esempio di filtraggio](https://i.ibb.co/KWFkM8y/Immagine-2022-01-17-125331.png "Esempio di filtraggio")
 
+## Diagramma delle classi e relativa struttura
+
+* UML
+  ![UML](https://i.ibb.co/1r9ygyM/progettonoriarduini.png "UML")
+  * Diagramma delle dipendenze
+    ![diagramma dipendenze](https://i.ibb.co/YkqYxVD/progettonoriarduini-dipendence.png "Diagramma delle dipendenze")
+
 ## Realizzazione
+
 Per la realizzazione del progetto sono stati usati:
+
 - **[IntelliJ IDEA](https://www.jetbrains.com/idea/)**: IDE per la scrittura del codice;
 - **[Spring Boot](https://spring.io/projects/spring-boot)**: framework per la creazione di server HTTP e API RESTful;
 - **[Maven](https://maven.apache.org/)**: per la gestione delle dipendenze di Spring;
@@ -141,5 +155,6 @@ Per la realizzazione del progetto sono stati usati:
 - **[JUnit 5](https://junit.org/junit5/)**: per la stesura dei tester per la funzionalità del programma.
 
 ## Autori
-- [Federico Arduini](https://github.com/faffolao) (contributo al 55%)
-- [Rocco Nori](https://github.com/reirocco) (contributo al 45%)
+
+- [Federico Arduini](https://github.com/faffolao) (contributo al 52%)
+- [Rocco Nori](https://github.com/reirocco) (contributo al 48%)

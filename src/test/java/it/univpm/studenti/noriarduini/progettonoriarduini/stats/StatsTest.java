@@ -15,17 +15,30 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+/**
+ * Verifica la funzionalità della statistica sui post
+ */
 class StatsTest {
 
+    /**
+     * definizione oggetto per generazione randomica
+     */
     private Random rand;
 
+    /**
+     * primo metodo ad essere eseguito all'avvio del test
+     */
     @BeforeEach
     void setUp() {
         // istanzio classi per il numero random
         this.rand = new Random();
     }
 
+    /**
+     * metodo test delle statistiche
+     *
+     * @throws JSONException
+     */
     @Test
     void buildStats() throws JSONException {
         JSONArray array = new JSONArray();

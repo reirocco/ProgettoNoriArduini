@@ -7,8 +7,26 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+/**
+ * Stats class
+ *
+ * <p>
+ * <p>
+ * la classe contiene un metodo statico per poter effettuare statistiche sui post di un utente
+ *
+ * @author Rocco Nori
+ * @author Federico Arduini
+ * @version 1.0
+ * @since 2022-01-16
+ */
 public class Stats {
 
+    /**
+     * restituisce un JSON contenente le statistiche sul totale dei post di un utente
+     *
+     * @param feed oggetto feed contenente i post
+     * @return JSONObject json con la statistica
+     */
     public static JSONObject buildStats(Feed feed) {
         // conto quanti post sono stati fatti nei vari archi temporali e metto questi risultati dentro un json
         JSONObject result = new JSONObject();

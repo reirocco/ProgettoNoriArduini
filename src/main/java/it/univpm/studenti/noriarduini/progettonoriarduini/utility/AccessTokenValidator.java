@@ -6,7 +6,25 @@ import org.json.JSONObject;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.web.client.HttpClientErrorException;
 
+/**
+ * AccesssTokenValidator class
+ *
+ * <p>
+ * <p>
+ * la classe testa la validità del token inserito nel file config.json
+ *
+ * @author Rocco Nori
+ * @author Federico Arduini
+ * @version 1.0
+ * @since 2022-01-16
+ */
 public class AccessTokenValidator {
+
+    /**
+     * il metodo effettua una chiamata http per testare la validità del token ritorna un json con "VALID" o "EXPIRED_OR_INVALID" a seconda della validità del token
+     *
+     * @return JSONObject json con la risposta
+     */
     public static JSONObject testTokenValidity() {
         Request request = new Request(new RestTemplateBuilder());
         String response;
@@ -24,6 +42,15 @@ public class AccessTokenValidator {
         return result;
     }
 
+    /**
+     * il metodo ritorna un booleano
+     * <ul>
+     *     <li><b>true</b> --> token valido</li>
+     *     <li><b>false</b> --> token non valido</li>
+     * </ul>
+     *
+     * @return
+     */
     public static boolean tokenIsValid() {
         JSONObject testObj = AccessTokenValidator.testTokenValidity();
         String validity = testObj.getString("access_token");
