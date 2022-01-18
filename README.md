@@ -17,6 +17,7 @@ Applicazione che permette di fare statistiche sui post di un utente Facebook e d
       - [Filtro per data di pubblicazione](#filtro-per-data-di-pubblicazione)
       - [Filtro per fascia oraria di pubblicazione](#filtro-per-fascia-oraria-di-pubblicazione)
       - [Filtro per parole chiave](#filtro-per-parole-chiave)
+- [Diagramma delle classi e relativa struttura](#diagramma-delle-classi-e-relativa-struttura)
 - [Realizzazione](#realizzazione)
 - [Autori](#autori)
 
